@@ -1,5 +1,5 @@
 body {
-    color: #999;
+    color: #1a1919;
     margin: 0;
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -26,3 +26,38 @@ body {
     height: 80%;
     object-fit: contain;
 }
+
+#movie-table {
+    margin-top: 16px;
+    max-width: 900px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.table th {
+    background: #f3f3f3;
+    user-select: none;
+}
+
+.sort-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 12px;
+}
+
+.separator {
+  margin: 50px 24px 0 0;
+  height: 10px;
+  background: #e0e0e0;
+}
+
