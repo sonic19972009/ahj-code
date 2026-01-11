@@ -1,4 +1,4 @@
-name: DOM – Moving Elements Game CI
+name: DOM CI
 
 on:
     push:
