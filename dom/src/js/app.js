@@ -4,7 +4,7 @@ import goblin from '../img/goblin.png';
 // Game part
 
 const FIELD_SIZE = 4;
-const INTERVAL = 1000;
+const INTERVAL_GAME = 1000;
 
 const game = document.getElementById('game');
 const cells = [];
@@ -13,28 +13,29 @@ const totalCells = FIELD_SIZE * FIELD_SIZE;
 for (let i = 0; i < totalCells; i += 1) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
-    cell.dataset.index = i;
-    game.appendChild(cell);
+    cell.dataset.index = String(i);
+    game.append(cell);
     cells.push(cell);
 }
 
 const img = document.createElement('img');
 img.classList.add('goblin');
 img.src = goblin;
+img.alt = 'goblin';
 
 let currentIndex = Math.floor(Math.random() * totalCells);
-cells[currentIndex].appendChild(img);
+cells[currentIndex].append(img);
 
-setInterval(() => {
+const gameIntervalId = setInterval(() => {
     let nextIndex = Math.floor(Math.random() * totalCells);
 
     while (nextIndex === currentIndex) {
         nextIndex = Math.floor(Math.random() * totalCells);
     }
 
-    cells[nextIndex].appendChild(img);
+    cells[nextIndex].append(img);
     currentIndex = nextIndex;
-}, INTERVAL);
+}, INTERVAL_GAME);
 
 // Table part
 
@@ -97,12 +98,12 @@ const createTable = () => {
         const arrow = document.createElement('span');
         arrow.classList.add('sort-arrow');
         arrow.textContent = '';
-        th.appendChild(arrow);
+        th.append(arrow);
 
-        headRow.appendChild(th);
+        headRow.append(th);
     });
 
-    thead.appendChild(headRow);
+    thead.append(headRow);
 
     const tbody = document.createElement('tbody');
 
@@ -125,22 +126,18 @@ const createTable = () => {
         const tdImdb = document.createElement('td');
         tdImdb.textContent = `imdb: ${formatImdb(movie.imdb)}`;
 
-        tr.appendChild(tdId);
-        tr.appendChild(tdTitle);
-        tr.appendChild(tdYear);
-        tr.appendChild(tdImdb);
+        tr.append(tdId, tdTitle, tdYear, tdImdb);
 
-        tbody.appendChild(tr);
+        tbody.append(tr);
     });
 
-    table.appendChild(thead);
-    table.appendChild(tbody);
+    table.append(thead, tbody);
 
     return table;
 };
 
 const table = createTable();
-tableRoot.appendChild(table);
+tableRoot.append(table);
 
 const tbody = table.querySelector('tbody');
 const headerCells = Array.from(table.querySelectorAll('thead th'));
@@ -186,15 +183,14 @@ const sortSteps = [
 
 let stepIndex = 0;
 
-setInterval(() => {
+const dataSortIntervalId = setInterval(() => {
     const { key, direction } = sortSteps[stepIndex];
 
     const rows = Array.from(tbody.querySelectorAll('tr'));
-
     rows.sort((a, b) => compare(a, b, key, direction));
 
     rows.forEach((row) => {
-        tbody.appendChild(row);
+        tbody.append(row);
     });
 
     setArrow(key, direction);
@@ -267,6 +263,8 @@ const compareMemory = (a, b, key, direction) => {
 
 const memoryRoot = document.getElementById('movie-table-memory');
 
+let memorySortIntervalId;
+
 if (memoryRoot) {
     const memoryTable = document.createElement('table');
     memoryTable.classList.add('table');
@@ -289,18 +287,17 @@ if (memoryRoot) {
         const arrow = document.createElement('span');
         arrow.classList.add('sort-arrow');
         arrow.textContent = '';
-        th.appendChild(arrow);
+        th.append(arrow);
 
-        headRow.appendChild(th);
+        headRow.append(th);
     });
 
-    thead.appendChild(headRow);
+    thead.append(headRow);
 
     const memoryTbody = document.createElement('tbody');
 
-    memoryTable.appendChild(thead);
-    memoryTable.appendChild(memoryTbody);
-    memoryRoot.appendChild(memoryTable);
+    memoryTable.append(thead, memoryTbody);
+    memoryRoot.append(memoryTable);
 
     const setMemoryArrow = (key, direction) => {
         const ths = Array.from(memoryTable.querySelectorAll('thead th'));
@@ -341,12 +338,8 @@ if (memoryRoot) {
             const tdImdb = document.createElement('td');
             tdImdb.textContent = `imdb: ${formatMemoryImdb(movie.imdb)}`;
 
-            tr.appendChild(tdId);
-            tr.appendChild(tdTitle);
-            tr.appendChild(tdYear);
-            tr.appendChild(tdImdb);
-
-            memoryTbody.appendChild(tr);
+            tr.append(tdId, tdTitle, tdYear, tdImdb);
+            memoryTbody.append(tr);
         });
     };
 
@@ -354,7 +347,7 @@ if (memoryRoot) {
 
     let memoryStepIndex = 0;
 
-    setInterval(() => {
+    memorySortIntervalId = setInterval(() => {
         const { key, direction } = memorySortSteps[memoryStepIndex];
 
         memoryMovies = [...memoryMovies].sort((a, b) => compareMemory(a, b, key, direction));
@@ -368,3 +361,9 @@ if (memoryRoot) {
         }
     }, 2000);
 }
+
+window.addEventListener('beforeunload', () => {
+    clearInterval(gameIntervalId);
+    clearInterval(dataSortIntervalId);
+    clearInterval(memorySortIntervalId);
+});
