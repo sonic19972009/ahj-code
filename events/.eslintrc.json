@@ -10,6 +10,9 @@
       "error",
       "LabeledStatement",
       "WithStatement"
-    ]
+    ],
+    "indent": ["error", 4],
+    "linebreak-style": "off",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }]
   }
 }

@@ -1,30 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<div data-widget="filter-widget">
-    <form>
-        <label>Фильтр <input data-id="filter-text" name="filter-text" class="input"></label>
-        <button data-action="filter" class="btn">Ok</button>
-    </form>
-</div>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>AHJ — Обработка событий</title>
+    </head>
+    <body>
+        <h1>Обработка событий</h1>
 
-<ul data-section="contact-list" class="contact-list">
-    <li data-contact data-contact-id="1" class="contact-list-item">
-        <div data-section="main" class="contact-main">
-            <img src="https://placeimg.com/40/40/people" class="contact-list-item-img" alt="">
-            <span class="contact-list-item-name">Иванов Александр</span>
-            <span class="contact-list-item-phone">+7960 077 00 00</span>
-            <a href="tel:+79600770000" data-phone="79600770000" data-action="call" class="contact-list-item-action">Звонок</a>
-        </div>
-        <div data-section="details" class="contact-details hidden">Подробная информация о клиенте</div>
-    </li>
-</ul>
+        <nav class="tabs">
+            <button class="tab is-active" type="button" data-tab="menu">Меню</button>
+            <button class="tab" type="button" data-tab="goblin">Игра с гоблинами</button>
+            <button class="tab" type="button" data-tab="tasks">TOP Tasks</button>
+            <button class="tab" type="button" data-tab="gallery">Галерея</button>
+        </nav>
 
-</body>
+        <main>
+            <section class="page is-active" data-page="menu">
+                <p class="muted">
+                    Выберите задачу.
+                </p>
+                <ul>
+                    <li><b>Игра с гоблинами</b></li>
+                    <li><b>TOP Tasks</b></li>
+                    <li><b>Галерея изображений</b></li>
+                </ul>
+            </section>
+
+            <section class="page" data-page="goblin">
+                <h2>Игра с гоблинами</h2>
+                <div class="panel">
+                    <div class="stats">
+                        <span>Score: <b data-id="score">0</b></span>
+                        <span>Misses: <b data-id="misses">0</b>/5</span>
+                    </div>
+                    <button class="btn" type="button" data-action="restart">Restart</button>
+                    <div class="message" data-id="message"></div>
+                </div>
+                <div id="game" class="game"></div>
+            </section>
+
+            <section class="page" data-page="tasks">
+                <h2>TOP Tasks</h2>
+                <p class="muted">-</p>
+            </section>
+
+            <section class="page" data-page="gallery">
+                <h2>Галерея изображений</h2>
+                <p class="muted">-</p>
+            </section>
+        </main>
+    </body>
 </html>
