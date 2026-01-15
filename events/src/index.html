@@ -19,7 +19,7 @@
         <main>
             <section class="page is-active" data-page="menu">
                 <p class="muted">
-                    Выберите задачу.
+                    Выберите задачу
                 </p>
                 <ul>
                     <li><b>Игра с гоблинами</b></li>
@@ -68,7 +68,18 @@
 
             <section class="page" data-page="gallery">
                 <h2>Галерея изображений</h2>
-                <p class="muted">-</p>
+                <div class="gallery">
+                    <form class="gallery__form" data-id="gallery-form" novalidate>
+                        <label class="gallery__label">
+                            <span class="gallery__label-text">Image URL</span>
+                            <input class="gallery__input" data-id="gallery-input" type="text" placeholder="Paste image URL and press Enter" />
+                        </label>
+                        <button class="btn" type="submit" data-action="gallery-add">Add</button>
+                        <div class="gallery__error" data-id="gallery-error"></div>
+                    </form>
+
+                    <ul class="gallery__list" data-id="gallery-list"></ul>
+                </div>
             </section>
         </main>
     </body>
