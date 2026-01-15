@@ -43,7 +43,27 @@
 
             <section class="page" data-page="tasks">
                 <h2>TOP Tasks</h2>
-                <p class="muted">-</p>
+                <div class="tasks">
+                    <div class="tasks__control">
+                        <label class="tasks__label">
+                            <span class="tasks__label-text">Task name</span>
+                            <input class="tasks__input" data-id="tasks-input" type="text" placeholder="Type task name and press Enter">
+                        </label>
+                        <div class="tasks__error" data-id="tasks-error"></div>
+                    </div>
+
+                    <div class="tasks__columns">
+                        <div class="tasks__col">
+                            <h3>Pinned</h3>
+                            <ul class="tasks__list" data-id="tasks-pinned"></ul>
+                        </div>
+
+                        <div class="tasks__col">
+                            <h3>All Tasks</h3>
+                            <ul class="tasks__list" data-id="tasks-all"></ul>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section class="page" data-page="gallery">

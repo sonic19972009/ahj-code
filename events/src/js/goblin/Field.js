@@ -40,8 +40,7 @@ export default class Field {
         this.cells[index].append(goblinEl);
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    removeGoblin(goblinEl) {
+    static removeGoblin(goblinEl) {
         if (goblinEl && goblinEl.parentElement) {
             goblinEl.remove();
         }

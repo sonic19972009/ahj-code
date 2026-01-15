@@ -92,3 +92,99 @@ body {
 [data-page="goblin"] {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='4'%3E%3Cpath d='M38 10h18v10H38z' fill='%23cfcfcf'/%3E%3Cpath d='M26 16h12v14H26z' fill='%23bdbdbd'/%3E%3Cpath d='M10 30l16-10 8 12-16 10z' fill='%239a6b3a'/%3E%3Cpath d='M18 44l12-8 18 26-12 8z' fill='%239a6b3a'/%3E%3C/g%3E%3C/svg%3E") 8 8, auto;
 }
+
+.tasks {
+    max-width: 520px;
+}
+
+.tasks__control {
+    margin: 12px 0 16px;
+}
+
+.tasks__label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tasks__label-text {
+    font-weight: 700;
+}
+
+.tasks__input {
+    display: inline-block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.tasks__error {
+    min-height: 18px;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.tasks__error.is-visible {
+    color: #b00020;
+}
+
+.tasks__columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.tasks__col h3 {
+    margin: 0 0 8px;
+}
+
+.tasks__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    background: #fff;
+}
+
+.tasks__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: .5rem .75rem;
+    border-top: 1px solid #ced4da;
+}
+
+.tasks__item:first-child {
+    border-top: none;
+}
+
+.tasks__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tasks__pin {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background: transparent;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.tasks__pin.is-active {
+    background: #333;
+}
+
+.tasks__empty {
+    padding: .5rem .75rem;
+    opacity: 0.7;
+}

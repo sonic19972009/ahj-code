@@ -1,54 +1,31 @@
-import initMenu from './menu';
+import Router from './core/Router';
+import Menu from './core/Menu';
 
-import goblinImg from '../img/goblin.png';
-import Field from './Field';
-import UI from './UI';
-import Game from './Game';
+import GoblinModule from './goblin';
+import TasksModule from './tasks';
 
-const FIELD_SIZE = 4;
-const INTERVAL = 1000;
-const MAX_MISSES = 5;
+export default function bootstrap() {
+    const tabsRoot = document.querySelector('.tabs');
 
-initMenu(document);
+    const goblinPage = document.querySelector('[data-page="goblin"]');
+    const tasksPage = document.querySelector('[data-page="tasks"]');
 
-let game = null;
-
-function createGame() {
-    const gameContainer = document.getElementById('game');
-    if (!gameContainer) return null;
-
-    const goblinEl = document.createElement('img');
-    goblinEl.classList.add('goblin');
-    goblinEl.src = goblinImg;
-    goblinEl.alt = 'goblin';
-
-    const field = new Field(gameContainer, FIELD_SIZE);
-    const ui = new UI(document);
-
-    const instance = new Game(field, ui, goblinEl, {
-        interval: INTERVAL,
-        maxMisses: MAX_MISSES,
+    const router = new Router({
+        pagesSelector: '[data-page]',
+        tabsSelector: '[data-tab]',
+        defaultPage: 'menu',
     });
 
-    instance.init();
-    return instance;
+    router.register('menu', {
+        init() {},
+        destroy() {},
+    });
+
+    router.register('goblin', new GoblinModule(goblinPage));
+    router.register('tasks', new TasksModule(tasksPage));
+
+    const menu = new Menu(tabsRoot, (pageName) => router.go(pageName));
+    menu.init();
+
+    router.start();
 }
-
-document.addEventListener('tabchange', (e) => {
-    const { tab } = e.detail;
-
-    if (tab === 'goblin') {
-        if (!game) {
-            game = createGame();
-        }
-        if (game) {
-            game.restart();
-        }
-        return;
-    }
-
-    if (game) {
-        game.destroy();
-        game = null;
-    }
-});

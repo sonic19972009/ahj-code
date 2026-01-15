@@ -1,11 +1,13 @@
+import Field from './Field';
+
 export default class Game {
-    constructor(field, ui, goblinEl, options) {
+    constructor(field, ui, goblinEl, options = {}) {
         this.field = field;
         this.ui = ui;
         this.goblinEl = goblinEl;
 
-        this.interval = options.interval;
-        this.maxMisses = options.maxMisses;
+        this.interval = typeof options.interval === 'number' ? options.interval : 1000;
+        this.maxMisses = typeof options.maxMisses === 'number' ? options.maxMisses : 5;
 
         this.timerId = null;
         this.currentIndex = -1;
@@ -19,6 +21,7 @@ export default class Game {
         this.onRestartClick = this.onRestartClick.bind(this);
 
         this.isInitialized = false;
+        this.isGameOver = false;
     }
 
     init() {
@@ -39,6 +42,8 @@ export default class Game {
         if (!this.isInitialized) this.init();
         if (this.timerId) return;
 
+        this.isGameOver = false;
+
         this.spawn();
         this.timerId = setInterval(this.tick, this.interval);
     }
@@ -49,7 +54,7 @@ export default class Game {
             this.timerId = null;
         }
 
-        this.field.removeGoblin(this.goblinEl);
+        Field.removeGoblin(this.goblinEl);
         this.currentIndex = -1;
         this.hitThisTurn = false;
     }
@@ -61,6 +66,7 @@ export default class Game {
         this.misses = 0;
         this.currentIndex = -1;
         this.hitThisTurn = false;
+        this.isGameOver = false;
 
         this.ui.setScore(this.score);
         this.ui.setMisses(this.misses);
@@ -79,14 +85,18 @@ export default class Game {
         }
 
         this.isInitialized = false;
+        this.isGameOver = false;
     }
 
     gameOver() {
         this.stop();
+        this.isGameOver = true;
         this.ui.setMessage('Game Over 😈');
     }
 
     tick() {
+        if (this.isGameOver) return;
+
         if (this.currentIndex !== -1 && !this.hitThisTurn) {
             this.misses += 1;
             this.ui.setMisses(this.misses);
@@ -101,17 +111,19 @@ export default class Game {
     }
 
     spawn() {
+        if (this.isGameOver) return;
+
         this.hitThisTurn = false;
 
         const nextIndex = this.field.randomIndex(this.currentIndex);
         this.currentIndex = nextIndex;
 
-        this.field.removeGoblin(this.goblinEl);
+        Field.removeGoblin(this.goblinEl);
         this.field.placeGoblin(this.currentIndex, this.goblinEl);
     }
 
     onClick(e) {
-        if (!this.timerId) return;
+        if (!this.timerId || this.isGameOver) return;
 
         const { target } = e;
         if (!target || !target.classList || !target.classList.contains('goblin')) return;
@@ -120,8 +132,10 @@ export default class Game {
 
         this.hitThisTurn = true;
         this.score += 1;
+
         this.ui.setScore(this.score);
-        this.field.removeGoblin(this.goblinEl);
+
+        Field.removeGoblin(this.goblinEl);
         this.currentIndex = -1;
     }
 
