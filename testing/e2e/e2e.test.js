@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 
 jest.setTimeout(60000);
 
-describe('Card form', () => {
+describe('Credit Card Validator (Puppeteer)', () => {
     let browser;
     let page;
     const baseUrl = 'http://localhost:9000';
@@ -18,14 +18,25 @@ describe('Card form', () => {
         await browser.close();
     });
 
-    test('shows valid result for valid card', async () => {
+    test('valid card number', async () => {
         await page.goto(baseUrl);
-
         await page.waitForSelector('[data-widget="card-form-widget"]');
 
+        await page.click('[data-id="card-input"]', { clickCount: 3 });
         await page.type('[data-id="card-input"]', '4111111111111111');
         await page.click('[data-id="card-submit"]');
 
         await page.waitForSelector('[data-id="card-result"].valid');
+    });
+
+    test('invalid card number', async () => {
+        await page.goto(baseUrl);
+        await page.waitForSelector('[data-widget="card-form-widget"]');
+
+        await page.click('[data-id="card-input"]', { clickCount: 3 });
+        await page.type('[data-id="card-input"]', '4111111111111112');
+        await page.click('[data-id="card-submit"]');
+
+        await page.waitForSelector('[data-id="card-result"].invalid');
     });
 });
