@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Card Validator</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <body>
+        <form data-widget="card-form-widget">
+            <ul data-id="card-icons" class="cards">
+            <li class="card" data-system="visa" title="Visa"></li>
+            <li class="card" data-system="mastercard" title="Mastercard"></li>
+            <li class="card" data-system="amex" title="American Express"></li>
+            <li class="card" data-system="discover" title="Discover"></li>
+            <li class="card" data-system="jcb" title="JCB"></li>
+            <li class="card" data-system="mir" title="MIR"></li>
+            <li class="card" data-system="unionpay" title="UnionPay"></li>
+            <li class="card" data-system="maestro" title="Maestro"></li>
+        </ul>
 
-<body>
-    <!-- TODO: comment after component added -->
-    <form data-widget="innogrn-form-widget">
         <div class="form-control">
-            <label for="innorgn-input">Введите ИНН/ОГРН</label>
-            <input id="innorgn-input" data-id="innogrn-input" type="text">
+            <label for="card-input">Card number</label>
+            <input id="card-input" data-id="card-input" type="text" autocomplete="off" />
         </div>
-        <button data-id="innogrn-submit">Далее</button>
-    </form>
-</body>
 
+            <button data-id="card-submit" type="submit">Validate</button>
+
+            <p data-id="card-result" class="result" aria-live="polite"></p>
+        </form>
+    </body>
 </html>

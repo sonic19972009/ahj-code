@@ -1,32 +1,31 @@
-import puppetteer from 'puppeteer';
+import puppeteer from 'puppeteer';
 
-jest.setTimeout(30000); // default puppeteer timeout
+jest.setTimeout(60000);
 
-describe('INN/OGRN form', () => {
-  let browser = null;
-  let page = null;
-  const baseUrl = 'http://localhost:9000';
+describe('Card form', () => {
+    let browser;
+    let page;
+    const baseUrl = 'http://localhost:9000';
 
-  beforeAll(async () => {
-    browser = await puppetteer.launch({
-      headless: false, // show gui
-      slowMo: 500,
-      devtools: true, // show devTools
+    beforeAll(async () => {
+        browser = await puppeteer.launch({
+            headless: true,
+        });
+        page = await browser.newPage();
     });
-    page = await browser.newPage();
-  });
 
-  afterAll(async () => {
-    await browser.close();
-  });
+    afterAll(async () => {
+        await browser.close();
+    });
 
-  test('should add .valid class for valid inn', async () => {
-    await page.goto(baseUrl);
-    const form = await page.$('[data-widget=innogrn-form-widget]');
-    const input = await form.$('[data-id=innogrn-input]');
-    await input.type('7715964180');
-    const submit = await form.$('[data-id=innogrn-submit]');
-    submit.click();
-    await page.waitFor('[data-id=innogrn-input].valid');
-  });
+    test('shows valid result for valid card', async () => {
+        await page.goto(baseUrl);
+
+        await page.waitForSelector('[data-widget="card-form-widget"]');
+
+        await page.type('[data-id="card-input"]', '4111111111111111');
+        await page.click('[data-id="card-submit"]');
+
+        await page.waitForSelector('[data-id="card-result"].valid');
+    });
 });

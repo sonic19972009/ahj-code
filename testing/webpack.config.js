@@ -1,55 +1,58 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-module.exports = {
-  target: 'web',
-  devtool: 'inline-source-map',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: path.resolve(__dirname, '/dist'),
-    open: true,
-    compress: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
+export default (env, argv) => {
+    const isProd = argv.mode === 'production';
+
+    return {
+        target: 'web',
+        devtool: isProd ? 'source-map' : 'eval-source-map',
+        entry: path.resolve('src', 'index.js'),
+        output: {
+            path: path.resolve('dist'),
+            filename: 'bundle.[contenthash].js',
+            clean: true,
         },
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
+        devServer: {
+            port: 9000,
+            open: true,
+            hot: true,
+            static: {
+                directory: path.resolve('dist'),
+            },
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.js$/i,
+                    exclude: /node_modules/,
+                    use: 'babel-loader',
+                },
+                {
+                    test: /\.html$/i,
+                    loader: 'html-loader',
+                },
+                {
+                    test: /\.css$/i,
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
+                    ],
+                },
+                {
+                    test: /\.(svg|png|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                },
+            ],
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: './src/index.html',
+            }),
+            new MiniCssExtractPlugin({
+                filename: isProd ? '[name].[contenthash].css' : '[name].css',
+            }),
         ],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
-        ],
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+    };
 };
-

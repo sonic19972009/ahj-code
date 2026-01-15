@@ -1,5 +1,5 @@
 import './css/style.css';
+import App from './js/app.js';
 
-import './js/app';
-
-// TODO: write your code in app.js
+const app = new App(document);
+app.init();
