@@ -44,7 +44,9 @@ jobs:
 
             - run: npm test
 
-            - run: npm run e2e
+            - name: Run e2e (Puppeteer)
+              run: |
+                  npx start-server-and-test "npm run start" http://localhost:9000 "jest --config jest.e2e.config.js"
 
             - run: npm run build
 

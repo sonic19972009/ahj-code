@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "test": "jest",
     "coverage": "jest --coverage",
-    "e2e": "start-server-and-test start http://localhost:9000 jest --config jest.e2e.config.js",
+    "e2e": "start-server-and-test \"npm run start\" http://localhost:9000 \"jest --config jest.e2e.config.js\"",
     "doc": "jsdoc -c jsdoc.conf.json",
     "preshow:coverage": "npm run coverage",
     "show:coverage": "live-server coverage/lcov-report",
