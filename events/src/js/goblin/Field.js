@@ -27,11 +27,11 @@ export default class Field {
     }
 
     randomIndex(excludeIndex) {
-        let index = Math.floor(Math.random() * this.cells.length);
+        let index;
 
-        while (index === excludeIndex) {
+        do {
             index = Math.floor(Math.random() * this.cells.length);
-        }
+        } while (index === excludeIndex);
 
         return index;
     }
