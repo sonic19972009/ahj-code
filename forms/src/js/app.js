@@ -1,5 +1,6 @@
 import Router from './core/Router.js';
 import Menu from './core/Menu.js';
+import LazyModule from './core/LazyModule.js';
 
 import PopoversModule from './popovers/PopoversModule.js';
 import EditorModule from './editor/EditorModule.js';
@@ -21,14 +22,10 @@ export default function bootstrap() {
     router.register('popovers', new PopoversModule(popoversPage));
     router.register('editor', new EditorModule(editorPage));
 
-    router.register('trip', {
-        init() {
-            tripPage.innerHTML = '<p>-</p>';
-        },
-        destroy() {
-            tripPage.innerHTML = '';
-        },
-    });
+    router.register('trip', new LazyModule(
+        () => import(/* webpackChunkName: "trip" */ './trip/TripModule.js'),
+        tripPage,
+    ));
 
     const menu = new Menu(tabsRoot, (pageName) => router.go(pageName));
     menu.init();
