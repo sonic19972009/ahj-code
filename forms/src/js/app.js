@@ -2,6 +2,7 @@ import Router from './core/Router.js';
 import Menu from './core/Menu.js';
 
 import PopoversModule from './popovers/PopoversModule.js';
+import EditorModule from './editor/EditorModule.js';
 
 export default function bootstrap() {
     const tabsRoot = document.querySelector('[data-widget="tabs"]');
@@ -18,15 +19,7 @@ export default function bootstrap() {
 
     router.register('menu', { init() {}, destroy() {} });
     router.register('popovers', new PopoversModule(popoversPage));
-
-    router.register('editor', {
-        init() {
-            editorPage.innerHTML = '<p>-</p>';
-        },
-        destroy() {
-            editorPage.innerHTML = '';
-        },
-    });
+    router.register('editor', new EditorModule(editorPage));
 
     router.register('trip', {
         init() {
