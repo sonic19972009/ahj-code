@@ -1,3 +1,44 @@
-// TODO: write code here
+import Router from './core/Router.js';
+import Menu from './core/Menu.js';
 
-console.log('app.js bundled');
+import PopoversModule from './popovers/PopoversModule.js';
+
+export default function bootstrap() {
+    const tabsRoot = document.querySelector('[data-widget="tabs"]');
+
+    const popoversPage = document.querySelector('[data-page="popovers"]');
+    const editorPage = document.querySelector('[data-page="editor"]');
+    const tripPage = document.querySelector('[data-page="trip"]');
+
+    const router = new Router({
+        pagesSelector: '[data-page]',
+        tabsSelector: '[data-tab]',
+        defaultPage: 'menu',
+    });
+
+    router.register('menu', { init() {}, destroy() {} });
+    router.register('popovers', new PopoversModule(popoversPage));
+
+    router.register('editor', {
+        init() {
+            editorPage.innerHTML = '<p>-</p>';
+        },
+        destroy() {
+            editorPage.innerHTML = '';
+        },
+    });
+
+    router.register('trip', {
+        init() {
+            tripPage.innerHTML = '<p>-</p>';
+        },
+        destroy() {
+            tripPage.innerHTML = '';
+        },
+    });
+
+    const menu = new Menu(tabsRoot, (pageName) => router.go(pageName));
+    menu.init();
+
+    router.start();
+}

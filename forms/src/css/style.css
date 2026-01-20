@@ -1,47 +1,84 @@
-p {
-    color: black;
+* {
+    box-sizing: border-box;
 }
 
-form {
-    margin-top: 200px;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #111;
 }
 
-:invalid {
-    /* border: 1px solid red; */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.input {
-    display: inline-block;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
+.title {
+    margin: 0 0 16px 0;
+    font-size: 22px;
 }
 
-.btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    border: 1px solid #ced4da;
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.form-control {
-    position: relative;
-    margin-bottom: 5px;
+.tab {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.form-error {
-  position: absolute;
-  padding: 5px 10px;
-  width: 200px;
-  background: #fff;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-  z-index: 999;
+.tab.active {
+    border-color: #111;
+}
+
+.page.hidden {
+    display: none;
+}
+
+.popovers-root {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.popover-trigger {
+    padding: 12px 26px;
+    border-radius: 6px;
+    border: none;
+    background: #dc3545;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popover-trigger:hover {
+    filter: brightness(0.95);
+}
+
+.popover {
+    position: absolute;
+    width: 280px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.popover-title {
+    padding: 10px 12px;
+    background: #f7f7f7;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-weight: 500;
+}
+
+.popover-content {
+    padding: 10px 12px;
 }

@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Forms</title>
 </head>
 <body>
+    <div class="container">
+        <h1 class="title">Forms</h1>
+
+        <nav class="tabs" data-widget="tabs">
+            <button class="tab active" type="button" data-tab="menu">Меню</button>
+            <button class="tab" type="button" data-tab="popovers">Popovers</button>
+            <button class="tab" type="button" data-tab="editor">Редактор списка</button>
+            <button class="tab" type="button" data-tab="trip">Trip Calendar</button>
+        </nav>
+
+        <main class="pages">
+            <section class="page" data-page="menu">
+                <p>Выберите задачу</p>
+            </section>
+
+            <section class="page hidden" data-page="popovers"></section>
+            <section class="page hidden" data-page="editor"></section>
+            <section class="page hidden" data-page="trip"></section>
+        </main>
+    </div>
 </body>
 </html>
