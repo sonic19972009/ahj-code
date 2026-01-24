@@ -1,68 +1,220 @@
-p {
-    color: black;
+* {
+    box-sizing: border-box;
 }
 
-.file-container {
-    width: 200px;
-    height: 40px;
-    position: relative;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f5f7;
+    color: #172b4d;
 }
 
-.overlapped {
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0; margin: 0;
-    opacity: 0.1;
-    width: 100%;
+.header {
+    padding: 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #e3e6ea;
 }
 
-.overlap {
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0; margin: 0;
-    width: 100%;
-    background: #eee;
-    border-radius: 5px;
-    line-height: 40px;
-    text-align: center;
+.tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.text-preview {
-    height: 200px;
-    width: 100%;
-    border: 1px dashed black;
-    border-radius: 5px;
-}
-
-.drop-area {
-    height: 200px;
-    width: 100%;
-    border: 1px dashed red;
-    border-radius: 5px;
-}
-
-
-.items {
-    list-style-type: none;
-    padding-left: 0;
-}
-.items-item {
-    border: 1px solid #999;
-    padding: 10px;
-    margin-bottom: -1px;;
-    cursor: pointer;
-    list-style-type: none;
-}
-.items-item:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-.items-item:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.items-item.dragged {
-    border-radius: 10px;
-    position: absolute;
-    z-index: 999;
-    pointer-events: none;
+.tab {
+    border: 1px solid #d0d4da;
     background: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.tab_active {
+    border-color: #0c66e4;
+}
+
+.pages {
+    padding: 16px;
+}
+
+.page {
+    display: none;
+}
+
+.page_active {
+    display: block;
+}
+
+.title {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.text {
+    margin: 0;
+}
+
+.menu {
+    max-width: 600px;
+}
+
+.menu__title {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.menu-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.menu-list li {
+    margin-bottom: 6px;
+}
+
+.menu-link {
+    color: #172b4d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    color: #0c66e4;
+    text-decoration: underline;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    align-items: start;
+}
+
+.column {
+    background: #ebecf0;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.column__title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 12px;
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 32px 10px 10px;
+    box-shadow: 0 1px 0 rgba(9, 30, 66, 0.2);
+    cursor: grab;
+    user-select: none;
+}
+
+.card__text {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.card__remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+    line-height: 1;
+}
+
+.card:hover .card__remove {
+    opacity: 1;
+}
+
+.placeholder {
+    border-radius: 10px;
+    background: rgba(9, 30, 66, 0.08);
+}
+
+html.is-grabbing,
+html.is-grabbing * {
+    cursor: grabbing !important;
+}
+
+.ghost {
+    position: absolute;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.adder {
+    margin-top: 10px;
+}
+
+.adder__btn {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: left;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #44546f;
+}
+
+.adder__btn:hover {
+    background: rgba(9, 30, 66, 0.08);
+}
+
+.hidden {
+    display: none;
+}
+
+.adder__form_hidden {
+    display: none;
+}
+
+.adder__textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+.adder__controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.adder__submit {
+    border: none;
+    background: #0c66e4;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.adder__cancel {
+    border: none;
+    background: rgba(9, 30, 66, 0.08);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
 }

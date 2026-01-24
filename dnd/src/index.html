@@ -1,14 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>AHJ DnD</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <body>
+        <header class="header">
+            <nav class="tabs" data-widget="tabs">
+                <button class="tab" type="button" data-tab="menu">Меню</button>
+                <button class="tab" type="button" data-tab="trello">Trello</button>
+                <button class="tab" type="button" data-tab="image">Image Manager</button>
+                <button class="tab" type="button" data-tab="download">Download Manager</button>
+            </nav>
+        </header>
 
-<body>
-</body>
+        <main class="pages">
+            <section class="page" data-page="menu">
+                <h1 class="title">DnD — домашка</h1>
+                <p class="text">Trello</p>
+            </section>
 
+            <section class="page" data-page="trello">
+                <div class="trello-root" data-widget="trello-root"></div>
+            </section>
+
+            <section class="page" data-page="image">
+                <p class="text">-</p>
+            </section>
+
+            <section class="page" data-page="download">
+                <p class="text">-</p>
+            </section>
+        </main>
+    </body>
 </html>

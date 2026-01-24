@@ -6,6 +6,8 @@
      "jest": true
   },
   "rules": {
+    "indent": ["error", 4],
+    "linebreak-style": "off",
     "no-restricted-syntax": [
       "error",
       "LabeledStatement",

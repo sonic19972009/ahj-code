@@ -1,5 +1,5 @@
 import './css/style.css';
 
-import './js/app';
+import bootstrap from './js/app';
 
-// TODO: write your code in app.js
+bootstrap();
