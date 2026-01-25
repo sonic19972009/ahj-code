@@ -218,3 +218,147 @@ html.is-grabbing * {
     border-radius: 10px;
     cursor: pointer;
 }
+
+.image__form {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.image__label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.image__input {
+    min-width: 320px;
+    padding: 10px 12px;
+}
+
+.image__btn {
+    padding: 10px 14px;
+}
+
+.image__error {
+    width: 100%;
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.image__error.is-visible {
+    opacity: 1;
+    height: auto;
+}
+
+.image__hint {
+    margin: 0 0 12px 0;
+    color: #44546f;
+    font-size: 14px;
+}
+
+.image__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.image__item {
+    cursor: grab;
+    list-style: none;
+}
+
+.image-card {
+    position: relative;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.image-card__preview {
+    aspect-ratio: 16 / 10;
+    background: #f5f5f5;
+}
+
+.image-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-card__actions {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.image-card__remove {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+}
+
+.image__placeholder {
+    list-style: none;
+    border: 2px dashed #aaa;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.image__ghost {
+    position: absolute;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.is-grabbing,
+.is-grabbing * {
+    cursor: grabbing !important;
+    user-select: none;
+}
+
+.image-drop {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(9, 30, 66, 0.45);
+    z-index: 99999;
+    padding: 24px;
+}
+
+.image_drop-active .image-drop {
+    display: flex;
+}
+
+.image-drop__box {
+    width: min(720px, 100%);
+    border-radius: 16px;
+    background: #ffffff;
+    border: 2px dashed rgba(9, 30, 66, 0.35);
+    padding: 28px;
+    text-align: center;
+}
+
+.image-drop__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.image-drop__subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+}

@@ -2,6 +2,7 @@ import Router from './core/Router';
 import Menu from './core/Menu';
 import MenuModule from './core/MenuModule';
 import TrelloModule from './trello/TrelloModule';
+import ImageModule from './image/ImageModule';
 
 class StubModule {
     constructor(container) {
@@ -33,7 +34,7 @@ export default function bootstrap() {
 
     router.register('menu', new MenuModule(menuPage, (page) => router.go(page)));
     router.register('trello', new TrelloModule(trelloPage));
-    router.register('image', new StubModule(imagePage));
+    router.register('image', new ImageModule(imagePage));
     router.register('download', new StubModule(downloadPage));
 
     const menu = new Menu(tabsRoot, (pageName) => router.go(pageName));
