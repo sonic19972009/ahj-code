@@ -362,3 +362,89 @@ html.is-grabbing * {
     font-size: 14px;
     opacity: 0.8;
 }
+
+.download__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.download__title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.download__total {
+    font-size: 14px;
+    color: #44546f;
+}
+
+.download__total-value {
+    font-weight: 700;
+    color: #172b4d;
+}
+
+.download__table-wrap {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.download__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.download__th,
+.download__td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e3e6ea;
+    text-align: left;
+}
+
+.download__th {
+    background: #f7f8fa;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #44546f;
+}
+
+.download__th_right,
+.download__td_right {
+    text-align: right;
+}
+
+.download__tr:last-child .download__td {
+    border-bottom: none;
+}
+
+.download__name {
+    font-weight: 700;
+}
+
+.download__meta {
+    font-size: 12px;
+    color: #44546f;
+    margin-top: 2px;
+}
+
+.download__btn {
+    border: none;
+    background: #0c66e4;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.download__btn:hover {
+    filter: brightness(0.98);
+}
+
+.download__size {
+    font-variant-numeric: tabular-nums;
+}

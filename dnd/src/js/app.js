@@ -3,20 +3,7 @@ import Menu from './core/Menu';
 import MenuModule from './core/MenuModule';
 import TrelloModule from './trello/TrelloModule';
 import ImageModule from './image/ImageModule';
-
-class StubModule {
-    constructor(container) {
-        this.container = container;
-    }
-
-    init() {
-        this.container.innerHTML = '<p class="text">Заглушка</p>';
-    }
-
-    destroy() {
-        this.container.innerHTML = '';
-    }
-}
+import LazyModule from './core/LazyModule';
 
 export default function bootstrap() {
     const tabsRoot = document.querySelector('[data-widget="tabs"]');
@@ -35,7 +22,14 @@ export default function bootstrap() {
     router.register('menu', new MenuModule(menuPage, (page) => router.go(page)));
     router.register('trello', new TrelloModule(trelloPage));
     router.register('image', new ImageModule(imagePage));
-    router.register('download', new StubModule(downloadPage));
+
+    router.register(
+        'download',
+        new LazyModule(
+            () => import(/* webpackChunkName: "download" */ './download/DownloadModule'),
+            downloadPage,
+        ),
+    );
 
     const menu = new Menu(tabsRoot, (pageName) => router.go(pageName));
     menu.init();

@@ -1,17 +1,21 @@
 {
-  "extends": "airbnb-base",
-  "env": {
-     "es6": true,
-     "browser": true,
-     "jest": true
-  },
-  "rules": {
-    "indent": ["error", 4],
-    "linebreak-style": "off",
-    "no-restricted-syntax": [
-      "error",
-      "LabeledStatement",
-      "WithStatement"
-    ]
-  }
+    "extends": "airbnb-base",
+    "env": {
+        "es6": true,
+        "browser": true,
+        "jest": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "linebreak-style": "off",
+        "no-restricted-syntax": [
+            "error",
+            "LabeledStatement",
+            "WithStatement"
+        ]
+    }
 }
